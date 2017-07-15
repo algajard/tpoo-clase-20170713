@@ -23,6 +23,13 @@ public class Usuario {
 		this.nombre = nombre;
 	}
 	
-	
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		
+		builder.append("ID: ").append(getId());
+		builder.append(" - Nombre : ").append(getNombre());
+		
+		return builder.toString();
+	}
 	
 }

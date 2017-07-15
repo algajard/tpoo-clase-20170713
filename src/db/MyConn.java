@@ -20,7 +20,7 @@ public class MyConn {
 	private String db; // Base de datos
 	private String url; // URL o IP
 	private String connString; // String de conexión generada
-	private Connection conn = null; // Objeto que mantiene la conexión
+	private static Connection conn = null; // Objeto que mantiene la conexión
 
 	public MyConn(String user, String password, String db, String url) {
 		StringBuilder builder = null;
@@ -37,8 +37,13 @@ public class MyConn {
 		builder.append(this.db);
 		builder.append("?user=");
 		builder.append(this.user);
-		builder.append("&");
-		builder.append(this.password);
+		
+		if( this.password != null && !this.password.equalsIgnoreCase("")) {
+			builder.append("&");
+			builder.append(this.password);
+		}
+		
+		connString = builder.toString();
 	}
 
 	public final String getUser() {
@@ -85,8 +90,8 @@ public class MyConn {
 		return success;
 	}
 
-	private Connection getConnection() {
-		return this.conn;
+	private static Connection getConnection() {
+		return conn;
 	}
 
 	public Boolean disconnect() throws SQLException {
